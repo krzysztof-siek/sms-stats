@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, inject} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartService } from '../shared/services/chart.service';
 import {LineChartComponent} from '../shared/components/line-chart/line-chart.component';
@@ -12,5 +12,7 @@ import {LineChartComponent} from '../shared/components/line-chart/line-chart.com
   styleUrls: ['./chart.component.scss']
 })
 export class ChartComponent {
-  constructor(public chartService: ChartService) {}
+  chartService = inject(ChartService);
+  chartData = this.chartService.chartData;
+
 }

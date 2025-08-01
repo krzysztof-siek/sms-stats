@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
+import {SmsChartData} from '../types/chat-data';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChartService {
 
-  constructor() { }
-
-  chartData: { [month: string]: number } = {
-    '2025-01': 120,
-    '2025-02': 180,
-    '2025-03': 90,
-    '2025-04': 10,
+  chartData: SmsChartData = {
+    '01/2025': 120,
+    '02/2025': 180,
+    '03/2025': 90,
+    '04/2025': 10,
   };
 
-  addSmsData(month: string, count: number): void {
-    if (this.chartData[month]) {
-      this.chartData[month] += count;
+  addSmsData(date: string, count: number): void {
+    if (this.chartData[date]) {
+      this.chartData[date] += count;
     } else {
-      this.chartData[month] = count;
+      this.chartData[date] = count;
     }
   }
 
