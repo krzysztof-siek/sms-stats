@@ -4,7 +4,7 @@ import moment from 'moment';
 export function monthYearFormatValidator(control: AbstractControl): ValidationErrors | null {
   const value = control.value;
   const isValid = moment(value, 'MM/YYYY', true).isValid();
-  return isValid ? null : { invalidDate: true };
+  return isValid ? null : {invalidDate: true};
 }
 
 
@@ -14,5 +14,5 @@ export function positiveIntegerValidator(control: AbstractControl): ValidationEr
   const normalized = String(value).replace(',', '.');
   const isValid = /^[1-9]\d*$/.test(normalized);
 
-  return isValid ? null : { invalidNumber: true };
+  return isValid ? null : {invalidNumber: true};
 }

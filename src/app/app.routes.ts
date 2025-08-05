@@ -2,6 +2,11 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'chart',
+    pathMatch: 'full'
+  },
+  {
     path: 'chart',
     loadComponent: () => import('./chart/chart.component').then(m => m.ChartComponent)
   },
@@ -10,9 +15,8 @@ export const routes: Routes = [
     loadComponent: () => import('./form/form.component').then(m => m.FormComponent)
   },
   {
-    path: '',
+    path: '**',
     redirectTo: 'chart',
-    pathMatch: 'full'
   },
 ];
 

@@ -1,25 +1,25 @@
 import { Component, inject } from '@angular/core';
-import {CommonModule} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   FormControl,
   FormGroup,
   ReactiveFormsModule,
   Validators
 } from '@angular/forms';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatInputModule} from '@angular/material/input';
-import {MatDatepicker, MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import {MatButtonModule} from '@angular/material/button';
-import {ChartService} from '../shared/services/chart.service';
-import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
-import {default as _rollupMoment, Moment} from 'moment';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatButtonModule } from '@angular/material/button';
+import { ChartService } from '../shared/services/chart.service';
+import { provideMomentDateAdapter } from '@angular/material-moment-adapter';
+import { default as _rollupMoment, Moment } from 'moment';
 import * as _moment from 'moment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 const moment = _rollupMoment || _moment;
-import {CustomErrorStateMatcher} from '../shared/utils/error-state-matcher';
-import {monthYearFormatValidator, positiveIntegerValidator} from '../shared/utils/validators';
-import {MY_FORMATS} from '../shared/utils/date-formats';
+import { CustomErrorStateMatcher } from '../shared/utils/error-state-matcher';
+import { monthYearFormatValidator, positiveIntegerValidator } from '../shared/utils/validators';
+import { MY_FORMATS } from '../shared/utils/date-formats';
 
 
 @Component({
@@ -41,9 +41,10 @@ import {MY_FORMATS} from '../shared/utils/date-formats';
   ]
 })
 export class FormComponent {
-  private readonly chartService = inject(ChartService);
-  private readonly snackBar = inject(MatSnackBar);
-  matcher = new CustomErrorStateMatcher();
+  readonly matcher = new CustomErrorStateMatcher();
+  readonly chartService = inject(ChartService);
+  readonly snackBar = inject(MatSnackBar);
+
 
   get dateControl() {
     return this.form.get('date');
@@ -80,7 +81,7 @@ export class FormComponent {
   }
 
   onSubmit() {
-    const { date, smsCount } = this.form.value;
+    const {date, smsCount} = this.form.value;
     if (this.form.invalid || !moment.isMoment(date) || !date.isValid() || !smsCount) {
       return;
     }

@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component, Input} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ChartConfiguration } from 'chart.js';
-import {BaseChartDirective} from 'ng2-charts';
+import { BaseChartDirective } from 'ng2-charts';
 import { ChartType } from 'chart.js';
 
 @Component({
@@ -44,12 +44,12 @@ export class LineChartComponent {
     responsive: true,
     scales: {
       x: {
-        title: { display: true, text: 'Data' },
-        grid: { display: false }
+        title: {display: true, text: 'Data'},
+        grid: {display: false}
       },
       y: {
         beginAtZero: true,
-        title: { display: true, text: 'Wartość' }
+        title: {display: true, text: 'Wartość'}
       }
     },
   };

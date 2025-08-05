@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {SmsChartData} from '../types/chat-data';
+import { SmsChartData } from '../types/chat-data';
 
 @Injectable({
   providedIn: 'root'

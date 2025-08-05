@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { ChartService } from '../shared/services/chart.service';
 import {LineChartComponent} from '../shared/components/line-chart/line-chart.component';
 
-
 @Component({
   selector: 'app-chart',
   standalone: true,
@@ -13,7 +12,7 @@ import {LineChartComponent} from '../shared/components/line-chart/line-chart.com
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChartComponent {
-  chartService = inject(ChartService);
+  readonly chartService = inject(ChartService);
   chartData = this.chartService.chartData;
 
 }
