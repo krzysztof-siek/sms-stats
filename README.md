@@ -51,15 +51,11 @@ src/
 ```
 
 ✨ Funkcje:
-- Wybór miesiąca i liczby wysłanych SMS-ów
-
-- Automatyczne sumowanie wartości dla tego samego miesiąca
-
-- Dynamiczna zmiana typu wykresu (line, bar)
-
+- Formularz umożliwia dodawanie liczby wysłanych SMS-ów do wybranych miesięcy (dane są sumowane, jeśli miesiąc już istnieje)
+- Wykres przedstawia łączną liczbę SMS-ów w każdym miesiącu
+- Dynamiczna zmiana typu wykresu (`line`, `bar`)
 - Responsywny interfejs (Bootstrap + Angular Material)
-
-- Nawigacja z routingiem (/chart, /form)
+- Nawigacja z routingiem (`/chart`, `/form`)
 
 ✅ Walidacja:
 - 🗓️ Data w formacie MM/YYYY (z Material Datepicker)
