@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+  AbstractControl,
   FormControl,
   FormGroup,
   ReactiveFormsModule,
@@ -45,11 +46,11 @@ export class FormComponent {
   readonly chartService = inject(ChartService);
   readonly snackBar = inject(MatSnackBar);
 
-  get dateControl() {
+  get dateControl(): AbstractControl | null {
     return this.form.get('date');
   }
 
-  get smsCountControl() {
+  get smsCountControl(): AbstractControl | null {
     return this.form.get('smsCount');
   }
 

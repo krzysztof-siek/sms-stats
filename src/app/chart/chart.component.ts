@@ -17,7 +17,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     LineChartComponent,
     FormsModule,
     MatFormFieldModule,
-    MatSelectModule,],
+    MatSelectModule
+  ],
   templateUrl: './chart.component.html',
   styleUrls: ['./chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

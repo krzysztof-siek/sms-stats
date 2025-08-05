@@ -21,6 +21,13 @@ Aplikacja będzie dostępna pod adresem:
 
 http://localhost:4200
 
+## 🧹 Lintowanie kodu
+Aby sprawdzić projekt pod kątem błędów i zgodności ze standardami ESLint, uruchom:
+
+```bash
+npm run lint
+```
+
 🧰 Technologie:
 
 - Angular (Standalone Components)
