@@ -1,52 +1,32 @@
-import {Component, inject, ViewEncapsulation} from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {
-  AbstractControl,
   FormControl,
   FormGroup,
-  FormsModule,
   ReactiveFormsModule,
-  ValidationErrors,
   Validators
 } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {MatDatepicker, MatDatepickerModule} from '@angular/material/datepicker';
-import { MatNativeDateModule} from '@angular/material/core';
+import {MatNativeDateModule} from '@angular/material/core';
 import {MatButtonModule} from '@angular/material/button';
 import {ChartService} from '../shared/services/chart.service';
 import {provideMomentDateAdapter} from '@angular/material-moment-adapter';
 import {default as _rollupMoment, Moment} from 'moment';
 import * as _moment from 'moment';
 import { MatSnackBar } from '@angular/material/snack-bar';
-
-
 const moment = _rollupMoment || _moment;
+import {CustomErrorStateMatcher} from '../shared/utils/error-state-matcher';
+import {monthYearFormatValidator, positiveIntegerValidator} from '../shared/utils/validators';
+import {MY_FORMATS} from '../shared/utils/date-formats';
 
-export const MY_FORMATS = {
-  parse: {
-    dateInput: 'MM/YYYY',
-  },
-  display: {
-    dateInput: 'MM/YYYY',
-    monthYearLabel: 'MMM YYYY',
-    dateA11yLabel: 'LL',
-    monthYearA11yLabel: 'MMMM YYYY',
-  },
-};
-
-function monthYearFormatValidator(control: AbstractControl): ValidationErrors | null {
-  const value = control.value;
-  const isValid = moment(value, 'MM/YYYY', true).isValid();
-  return isValid ? null : { invalidDate: true };
-}
 
 @Component({
   selector: 'app-form',
   standalone: true,
   imports: [
     CommonModule,
-    FormsModule,
     MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
@@ -61,52 +41,65 @@ function monthYearFormatValidator(control: AbstractControl): ValidationErrors | 
   ]
 })
 export class FormComponent {
-  form = new FormGroup({
-    date: new FormControl<Moment | null>(moment(), [
+  private readonly chartService = inject(ChartService);
+  private readonly snackBar = inject(MatSnackBar);
+  matcher = new CustomErrorStateMatcher();
+
+  get dateControl() {
+    return this.form.get('date');
+  }
+
+  get smsCountControl() {
+    return this.form.get('smsCount');
+  }
+
+  private getInitialDate(): Moment {
+    return moment();
+  }
+
+  readonly form = new FormGroup({
+    date: new FormControl<Moment | null>(this.getInitialDate(), [
       Validators.required,
       monthYearFormatValidator]
     ),
-    smsCount: new FormControl(null, {
-      validators: [Validators.required, Validators.min(1), Validators.pattern(/^[1-9]\d*$/)],
+    smsCount: new FormControl<number | null>(null, {
+      validators: [Validators.required, Validators.min(1), positiveIntegerValidator],
     })
   })
-  chartService = inject(ChartService);
-  snackBar = inject(MatSnackBar);
 
 
+  setMonthAndYear(monthYear: Moment, datepicker: MatDatepicker<Moment>): void {
+    const control = this.form.get('date');
+    const value = control?.value;
 
-  setMonthAndYear(normalizedMonthAndYear: Moment, datepicker: MatDatepicker<Moment>) {
-    const ctrl = this.form.get('date');
-    if (ctrl) {
-      ctrl.setValue(moment(ctrl.value).month(normalizedMonthAndYear.month()).year(normalizedMonthAndYear.year()));
-      datepicker.close();
-    }
+    if (!control || !moment.isMoment(value) || !value.isValid()) return;
+
+    const updated = value.clone().month(monthYear.month()).year(monthYear.year());
+    control.setValue(updated);
+    datepicker.close();
   }
 
-  addData() {
-    if (this.form.valid) {
-      const { date, smsCount } = this.form.value;
-      if (date && smsCount) {
-        this.chartService.addSmsData(date.format('MM/YYYY'), smsCount);
-      }
-      this.snackBar.open('Dodano dane SMS 📈', 'Zamknij', {
-        duration: 3000,
-        panelClass: ['snackbar-success'],
-      });
-      this.clearForm();
+  onSubmit() {
+    const { date, smsCount } = this.form.value;
+    if (this.form.invalid || !moment.isMoment(date) || !date.isValid() || !smsCount) {
+      return;
     }
+
+    this.chartService.addSmsData(date.format('MM/YYYY'), smsCount);
+    this.snackBar.open('Dodano dane SMS 📈', 'Zamknij', {
+      duration: 3000,
+      panelClass: ['snackbar-success'],
+    });
+    this.clearForm();
   }
 
   private clearForm(): void {
     this.form.reset({
-      date: moment(),
+      date: this.getInitialDate(),
       smsCount: null
     });
-
     this.form.markAsPristine();
     this.form.markAsUntouched();
-    this.form.updateValueAndValidity();
-    console.log('elo')
   }
 
 

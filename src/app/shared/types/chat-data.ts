@@ -1,2 +1,2 @@
-export type MonthYear = string; // np. 'MM/YYYY'
+export type MonthYear = string;
 export type SmsChartData = Record<MonthYear, number>;

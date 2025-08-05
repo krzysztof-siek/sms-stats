@@ -10,7 +10,7 @@ export class ChartService {
     '01/2025': 120,
     '02/2025': 180,
     '03/2025': 90,
-    '04/2025': 10,
+    '04/2025': 100,
   };
 
   addSmsData(date: string, count: number): void {

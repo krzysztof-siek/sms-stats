@@ -1,6 +1,4 @@
 import { Routes } from '@angular/router';
-import { ChartComponent } from './chart/chart.component';
-import { FormComponent } from './form/form.component';
 
 export const routes: Routes = [
   {
