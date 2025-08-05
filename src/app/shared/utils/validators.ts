@@ -2,9 +2,10 @@ import { AbstractControl, ValidationErrors } from '@angular/forms';
 import moment from 'moment';
 
 export function monthYearFormatValidator(control: AbstractControl): ValidationErrors | null {
-  const value = control.value;
-  const isValid = moment(value, 'MM/YYYY', true).isValid();
-  return isValid ? null : {invalidDate: true};
+  const rawValue = control.value;
+  if (!rawValue) return null;
+  const parsed = moment(rawValue, 'MM/YYYY', true);
+  return parsed.isValid() ? null : { invalidDate: true };
 }
 
 

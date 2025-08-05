@@ -1,7 +1,8 @@
 <section>
   <h2>Dodaj dane SMS</h2>
 
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="d-flex flex-column gap-3" style="max-width: 400px;">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()"
+        class="d-flex flex-column gap-3" style="max-width: 400px;">
     <mat-form-field appearance="fill">
       <mat-label>Miesiac</mat-label>
       <input matInput [matDatepicker]="dp" formControlName="date" required>
@@ -21,7 +22,10 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Liczba SMS-ów</mat-label>
-      <input matInput type="number" formControlName="smsCount" min="1" step="1"  required [errorStateMatcher]="matcher">
+      <input matInput type="number"
+             formControlName="smsCount"
+             min="1" step="1" required
+             [errorStateMatcher]="matcher">
         @if (smsCountControl?.hasError('required')) {
           <mat-error>To pole jest wymagane</mat-error>
         }
@@ -34,8 +38,7 @@
             class="mt-4"
             color="primary"
             type="submit"
-            [disabled]="!form.valid">
-      Dodaj
+            [disabled]="!form.valid">Dodaj
     </button>
 
   </form>

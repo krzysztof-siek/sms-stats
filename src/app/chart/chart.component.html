@@ -1,5 +1,13 @@
 <section>
   <h2>Wykres SMS-ów</h2>
-  <app-line-chart [data]="chartData"></app-line-chart>
+  <mat-form-field appearance="fill">
+    <mat-label>Typ wykresu</mat-label>
+    <mat-select [(ngModel)]="chartType">
+      <mat-option *ngFor="let type of chartTypesOptions" [value]="type.value">
+        {{ type.label }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <app-line-chart [data]="chartData" [chartType]="chartType"></app-line-chart>
 </section>
 

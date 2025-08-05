@@ -19,7 +19,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 const moment = _rollupMoment || _moment;
 import { CustomErrorStateMatcher } from '../shared/utils/error-state-matcher';
 import { monthYearFormatValidator, positiveIntegerValidator } from '../shared/utils/validators';
-import { MY_FORMATS } from '../shared/utils/date-formats';
+import { MONTH_YEAR_DATE_FORMATS } from '../shared/utils/date-formats';
 
 
 @Component({
@@ -37,14 +37,13 @@ import { MY_FORMATS } from '../shared/utils/date-formats';
   templateUrl: './form.component.html',
   styleUrl: './form.component.scss',
   providers: [
-    provideMomentDateAdapter(MY_FORMATS),
+    provideMomentDateAdapter(MONTH_YEAR_DATE_FORMATS),
   ]
 })
 export class FormComponent {
   readonly matcher = new CustomErrorStateMatcher();
   readonly chartService = inject(ChartService);
   readonly snackBar = inject(MatSnackBar);
-
 
   get dateControl() {
     return this.form.get('date');
@@ -102,6 +101,5 @@ export class FormComponent {
     this.form.markAsPristine();
     this.form.markAsUntouched();
   }
-
 
 }

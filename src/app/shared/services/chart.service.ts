@@ -14,11 +14,7 @@ export class ChartService {
   };
 
   addSmsData(date: string, count: number): void {
-    if (this.chartData[date]) {
-      this.chartData[date] += count;
-    } else {
-      this.chartData[date] = count;
-    }
+    this.chartData[date] = (this.chartData[date] ?? 0) + count;
   }
 
 }

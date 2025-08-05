@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChartConfiguration } from 'chart.js';
 import { BaseChartDirective } from 'ng2-charts';
 import { ChartType } from 'chart.js';
+import { ChartTypeEnum } from '../../enums/chart-type-labels';
 
 @Component({
   selector: 'app-line-chart',
@@ -14,7 +15,7 @@ import { ChartType } from 'chart.js';
 })
 export class LineChartComponent {
   @Input() data: Record<string, number> = {};
-  public chartType: ChartType = 'line';
+  @Input() chartType: ChartType = ChartTypeEnum.Line;
 
   get chartData(): ChartConfiguration<ChartType>['data'] {
     const labels = Object.keys(this.data).sort((a, b) => {
