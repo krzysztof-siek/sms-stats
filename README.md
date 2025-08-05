@@ -1,60 +1,80 @@
-# SmsStats
+# 📊 Angular SMS Chart App
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+Aplikacja SPA zbudowana w Angularze, umożliwiająca dodawanie i wizualizację liczby wysłanych SMS-ów w poszczególnych miesiącach.
 
-## Development server
+Projekt stworzony na potrzeby zadania rekrutacyjnego.
 
-To start a local development server, run:
+---
 
+## 🚀 Uruchomienie projektu
+
+1. Zainstaluj zależności:
+
+```bash
+npm install
+```
+2. Uruchom projekt:
 ```bash
 ng serve
 ```
+Aplikacja będzie dostępna pod adresem:
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+http://localhost:4200
 
-## Code scaffolding
+🧰 Technologie:
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Angular (Standalone Components)
 
-```bash
-ng generate component component-name
+- Bootstrap 5
+
+- Angular Material
+
+- ng2-charts + Chart.js
+
+- Moment.js
+
+- TypeScript
+
+📁 Struktura projektu
+```text
+src/
+├── app/
+│   ├── chart/          → widok wykresu
+│   ├── form/           → widok formularza
+│   ├── shared/
+│   │   ├── components/   → komponent wykresu
+│   │   ├── enums/        → typy wykresów (np. ChartTypeEnum)
+│   │   ├── interfaces/   → interfejsy danych (np. ChartTypeOption)
+│   │   ├── services/     → singleton z danymi (ChartService)
+│   │   ├── types/        → aliasy typów / złożone typy pomocnicze
+│   │   └── utils/        → walidatory, formaty, matcher
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+✨ Funkcje:
+- Wybór miesiąca i liczby wysłanych SMS-ów
 
-```bash
-ng generate --help
-```
+- Automatyczne sumowanie wartości dla tego samego miesiąca
 
-## Building
+- Dynamiczna zmiana typu wykresu (line, bar)
 
-To build the project run:
+- Responsywny interfejs (Bootstrap + Angular Material)
 
-```bash
-ng build
-```
+- Nawigacja z routingiem (/chart, /form)
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+✅ Walidacja:
+- 🗓️ Data w formacie MM/YYYY (z Material Datepicker)
 
-## Running unit tests
+- 🔢 Liczba SMS-ów – tylko dodatnie liczby całkowite
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
 
-```bash
-ng test
-```
+🧠 Uwagi techniczne:
+- Wykres bazuje na ng2-charts i przyjmuje dane przez @Input
 
-## Running end-to-end tests
+- Dane przechowywane są w singletonie ChartService
 
-For end-to-end (e2e) testing, run:
+- Formularz oparty o ReactiveForms
+- Routing i konfiguracja aplikacji bez AppModule (standalone setup)
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
-# sms-stats
+👤 Autor
+Krzysztof Siek
+2025 – aplikacja demonstracyjna na potrzeby procesu rekrutacyjnego
