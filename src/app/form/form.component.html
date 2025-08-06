@@ -15,9 +15,6 @@
       @if (dateControl?.hasError('invalidDate')) {
         <mat-error>Niepoprawny format daty (MM/RRRR)</mat-error>
       }
-      @else if (dateControl?.hasError('required')) {
-        <mat-error>To pole jest wymagane</mat-error>
-      }
     </mat-form-field>
 
     <mat-form-field appearance="fill">
