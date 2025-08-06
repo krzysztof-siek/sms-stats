@@ -3,9 +3,11 @@
   <mat-form-field appearance="fill">
     <mat-label>Typ wykresu</mat-label>
     <mat-select [(ngModel)]="chartType">
-      <mat-option *ngFor="let type of chartTypesOptions" [value]="type.value">
-        {{ type.label }}
-      </mat-option>
+      @for (type of chartTypesOptions; track type.value) {
+        <mat-option [value]="type.value">
+          {{ type.label }}
+        </mat-option>
+      }
     </mat-select>
   </mat-form-field>
   <app-line-chart [data]="chartData" [chartType]="chartType"></app-line-chart>
